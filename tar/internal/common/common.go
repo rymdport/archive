@@ -5,8 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"fyne.io/fyne/v2"
-	"github.com/Jacalz/arkivera/internal/tar"
+	"github.com/rymdport/archives/tar"
 )
 
 // ArchiveAndCompress provides a common way to archive and compress.
@@ -14,13 +13,11 @@ import (
 func ArchiveAndCompress(source string, compress io.Writer) (err error) {
 	file, err := os.Open(filepath.Clean(source))
 	if err != nil {
-		fyne.LogError("Could not opent eh file", err)
 		return err
 	}
 
 	defer func() {
 		if cerr := file.Close(); cerr != nil {
-			fyne.LogError("Could not close the file", err)
 			err = cerr
 		}
 	}()

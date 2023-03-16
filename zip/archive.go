@@ -6,7 +6,6 @@ import (
 	"path/filepath"
 	"strings"
 
-	"fyne.io/fyne/v2"
 	"github.com/klauspost/compress/zip"
 )
 
@@ -16,14 +15,12 @@ func Archive(source string, target io.Writer) (err error) {
 
 	defer func() {
 		if cerr := writer.Close(); cerr != nil {
-			fyne.LogError("Could not close the file", err)
 			err = cerr
 		}
 	}()
 
 	baseDir := ""
 	if info, err := os.Stat(source); err != nil {
-		fyne.LogError("Could not stat the source", err)
 		return err
 	} else if info.IsDir() {
 		baseDir = filepath.Base(source)
@@ -40,7 +37,6 @@ func Archive(source string, target io.Writer) (err error) {
 		}
 		return archiveFile(path, relative, info, writer)
 	}); err != nil {
-		fyne.LogError("Could not walk", err)
 		return err
 	}
 
@@ -50,7 +46,6 @@ func Archive(source string, target io.Writer) (err error) {
 func archiveFile(path, relative string, info os.FileInfo, target *zip.Writer) (err error) {
 	header, err := zip.FileInfoHeader(info)
 	if err != nil {
-		fyne.LogError("Could not create header from fileinfo", err)
 		return err
 	}
 
@@ -66,7 +61,6 @@ func archiveFile(path, relative string, info os.FileInfo, target *zip.Writer) (e
 
 	writer, err := target.CreateHeader(header)
 	if err != nil {
-		fyne.LogError("Could not create header", err)
 		return err
 	}
 
@@ -76,21 +70,18 @@ func archiveFile(path, relative string, info os.FileInfo, target *zip.Writer) (e
 
 	file, err := os.Open(path) // #nosec - The received path is already cleaned
 	if err != nil {
-		fyne.LogError("Could not open the file", err)
 		return err
 	}
 
 	defer func() {
 		cerr := file.Close()
 		if err != nil {
-			fyne.LogError("Could not close the file", err)
 			err = cerr
 		}
 	}()
 
 	_, err = io.Copy(writer, file)
 	if err != nil {
-		fyne.LogError("Could not copy file contents", err)
 		return err
 	}
 

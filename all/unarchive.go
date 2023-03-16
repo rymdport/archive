@@ -4,13 +4,12 @@ import (
 	"errors"
 	"io"
 
-	"fyne.io/fyne/v2"
-	"github.com/Jacalz/arkivera/internal/tar"
-	"github.com/Jacalz/arkivera/internal/tar/bzip2"
-	"github.com/Jacalz/arkivera/internal/tar/gzip"
-	"github.com/Jacalz/arkivera/internal/tar/xz"
-	"github.com/Jacalz/arkivera/internal/tar/zstd"
-	"github.com/Jacalz/arkivera/internal/zip"
+	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archives/tar/bzip2"
+	"github.com/rymdport/archives/tar/gzip"
+	"github.com/rymdport/archives/tar/xz"
+	"github.com/rymdport/archives/tar/zstd"
+	"github.com/rymdport/archives/zip"
 )
 
 var errorZipUnarchiveNotPossible = errors.New("zip unarchive must conform to io.Seeker and io.ReaderAt")
@@ -39,26 +38,22 @@ func Unarchive(source io.Reader, ext, target string) error {
 func tryExtractZip(source io.Reader, target string) error {
 	reader, ok := source.(io.ReaderAt)
 	if !ok {
-		fyne.LogError("Could not unarchive zip file", errorZipUnarchiveNotPossible)
 		return errorZipUnarchiveNotPossible
 	}
 
 	seek, ok := source.(io.Seeker)
 	if !ok {
-		fyne.LogError("Could not unarchive zip file", errorZipUnarchiveNotPossible)
 		return errorZipUnarchiveNotPossible
 	}
 
 	size, err := seek.Seek(0, io.SeekEnd)
 	if err != nil {
-		fyne.LogError("Could not seek to end", err)
 		return err
 	}
 
 	// Seek back to start to reset the reading offset
 	_, err = seek.Seek(0, io.SeekStart)
 	if err != nil {
-		fyne.LogError("Could not seek back to start", err)
 		return err
 	}
 

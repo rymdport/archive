@@ -4,11 +4,11 @@ import (
 	"errors"
 	"io"
 
-	"github.com/Jacalz/arkivera/internal/tar"
-	"github.com/Jacalz/arkivera/internal/tar/gzip"
-	"github.com/Jacalz/arkivera/internal/tar/xz"
-	"github.com/Jacalz/arkivera/internal/tar/zstd"
-	"github.com/Jacalz/arkivera/internal/zip"
+	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archives/tar/gzip"
+	"github.com/rymdport/archives/tar/xz"
+	"github.com/rymdport/archives/tar/zstd"
+	"github.com/rymdport/archives/zip"
 )
 
 var errorInvalidFormat = errors.New("unsupported archive format")

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Arkivera
-Exec=arkivera %U
-Icon=org.gnome.ArchiveManager
-Comment=Create and extract archives
-Categories=Archiving;Compression;
-Keywords=zip;tar;extract;unpack;fyne;
-MimeType=application/bzip2;application/gzip;application/x-ar;application/x-archive;application/x-arj;application/x-cabinet;application/x-compress;application/x-compressed-tar;application/x-gtar;application/x-gzip;application/x-;application/x-tar;application/x-tarz;application/x-stuffit;application/x-war;application/x-xar;application/x-xz;application/x-xz-compressed-tar;application/x-zip;application/x-zip-compressed;application/x-zstd-compressed-tar;application/x-zoo;application/zip;application/zstd;
