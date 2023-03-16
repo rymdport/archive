@@ -59,7 +59,7 @@ func extractFile(file *zip.File, target string) (err error) {
 		return
 	}
 
-	targetFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
+	targetFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode()) // #nosec - path is already cleaned by filepath.Abs()
 	if err != nil {
 		return
 	}
