@@ -19,7 +19,7 @@ func Compress(source string, target io.Writer) (err error) {
 
 	err = common.ArchiveAndCompress(source, gz)
 	if err != nil {
-		return err
+		return
 	}
 
 	return

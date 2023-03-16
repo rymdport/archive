@@ -74,7 +74,7 @@ func extractFile(file *zip.File, target string) (err error) {
 
 	_, err = io.Copy(targetFile, fileReader)
 	if err != nil {
-		return err
+		return
 	}
 
 	return

@@ -22,7 +22,7 @@ func Compress(source string, target io.Writer) (err error) {
 
 	err = common.ArchiveAndCompress(source, xz)
 	if err != nil {
-		return err
+		return
 	}
 
 	return

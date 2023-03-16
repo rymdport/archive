@@ -59,7 +59,7 @@ func extractFile(path string, info os.FileInfo, target *tar.Reader) (err error) 
 
 	_, err = io.Copy(file, target)
 	if err != nil {
-		return err
+		return
 	}
 
 	return

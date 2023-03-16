@@ -9,10 +9,5 @@ import (
 
 // Decompress takes a tar.bz2 source to decompress from and a target to decompress to.
 func Decompress(source io.Reader, target string) error {
-	err := tar.Unarchive(bzip2.NewReader(source), target)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return tar.Unarchive(bzip2.NewReader(source), target)
 }

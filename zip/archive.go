@@ -82,7 +82,7 @@ func archiveFile(path, relative string, info os.FileInfo, target *zip.Writer) (e
 
 	_, err = io.Copy(writer, file)
 	if err != nil {
-		return err
+		return
 	}
 
 	return

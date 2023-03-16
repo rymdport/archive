@@ -22,5 +22,6 @@ func ArchiveAndCompress(source string, compress io.Writer) (err error) {
 		}
 	}()
 
-	return tar.Archive(source, compress)
+	err = tar.Archive(source, compress)
+	return
 }

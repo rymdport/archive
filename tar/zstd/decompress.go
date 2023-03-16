@@ -16,10 +16,5 @@ func Decompress(source io.Reader, target string) error {
 
 	defer zstd.Close() // Does not return any error value.
 
-	err = tar.Unarchive(zstd, target)
-	if err != nil {
-		return err
-	}
-
-	return nil
+	return tar.Unarchive(zstd, target)
 }
