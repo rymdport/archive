@@ -3,13 +3,13 @@ package gzip
 import (
 	"io"
 
-	"github.com/klauspost/pgzip"
+	"github.com/klauspost/compress/gzip"
 	"github.com/rymdport/archives/tar"
 )
 
 // Decompress takes a tar.gz source to decompress from and a target to decompress to.
 func Decompress(source io.Reader, target string) (err error) {
-	gz, err := pgzip.NewReader(source)
+	gz, err := gzip.NewReader(source)
 	if err != nil {
 		return err
 	}
