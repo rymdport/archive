@@ -20,3 +20,8 @@ Zip archives can be created using the `zip` package.
 
 **The following compression formats are supported:**
 - gzip
+
+## Security
+
+This library takes care to make sure that file paths are cleaned to try and avoid path traversals.
+All close methods that returns errors are also handled accordingly when defered. 
