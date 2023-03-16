@@ -9,7 +9,7 @@ import (
 
 // Unarchive takes a reader as a tarball source and extracts it to the target directory.
 func Unarchive(source io.Reader, target string) (err error) {
-	if err = os.MkdirAll(target, 0750); err != nil {
+	if err = os.MkdirAll(target, 0o750); err != nil {
 		return err
 	}
 
@@ -27,7 +27,7 @@ func Unarchive(source io.Reader, target string) (err error) {
 		path := filepath.Join(target, header.Name)
 		info := header.FileInfo()
 		if info.IsDir() {
-			if err = os.MkdirAll(path, 0750); err != nil {
+			if err = os.MkdirAll(path, 0o750); err != nil {
 				return err
 			}
 			continue
@@ -42,7 +42,7 @@ func Unarchive(source io.Reader, target string) (err error) {
 }
 
 func extractFile(path string, info os.FileInfo, target *tar.Reader) (err error) {
-	if err := os.MkdirAll(filepath.Dir(path), 0750); err != nil {
+	if err := os.MkdirAll(filepath.Dir(path), 0o750); err != nil {
 		return err
 	}
 
