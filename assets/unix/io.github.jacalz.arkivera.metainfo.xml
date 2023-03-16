@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.jacalz.arkivera</id>
+  
+  <name>Arkivera</name>
+  <summary>A cross-platform archive manager focusing on simplicity and modern defaults.</summary>
+  
+  <metadata_license>CC-BY-SA-4.0</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+  
+  <recommends>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </recommends>
+  
+  <description>
+    <p>
+      A cross-platform archive manager focusing on simplicity and modern defaults. The name &quot;Arkivera&quot; comes from the Swedish word &quot;to archive&quot;.
+    </p>
+  </description>
+  
+  <launchable type="desktop-id">arkivera.desktop</launchable>
+</component>
