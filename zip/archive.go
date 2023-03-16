@@ -19,14 +19,17 @@ func Archive(source string, target io.Writer) (err error) {
 		}
 	}()
 
+	info, err := os.Stat(source)
+	if err != nil {
+		return
+	}
+
 	baseDir := ""
-	if info, err := os.Stat(source); err != nil {
-		return err
-	} else if info.IsDir() {
+	if info.IsDir() {
 		baseDir = filepath.Base(source)
 	}
 
-	if err := filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
+	err = filepath.Walk(source, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
@@ -36,9 +39,7 @@ func Archive(source string, target io.Writer) (err error) {
 			relative = filepath.Join(baseDir, strings.TrimPrefix(path, source))
 		}
 		return archiveFile(path, relative, info, writer)
-	}); err != nil {
-		return err
-	}
+	})
 
 	return
 }
@@ -75,15 +76,11 @@ func archiveFile(path, relative string, info os.FileInfo, target *zip.Writer) (e
 
 	defer func() {
 		cerr := file.Close()
-		if err != nil {
+		if cerr != nil {
 			err = cerr
 		}
 	}()
 
 	_, err = io.Copy(writer, file)
-	if err != nil {
-		return
-	}
-
 	return
 }

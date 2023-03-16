@@ -50,20 +50,18 @@ func extractFile(file *zip.File, target string) (err error) {
 	}()
 
 	if file.FileInfo().IsDir() {
-		if err := os.MkdirAll(path, 0750); err != nil {
-			return err
-		}
-
-		return nil
+		err = os.MkdirAll(path, 0750)
+		return
 	}
 
-	if err := os.MkdirAll(filepath.Dir(path), 0750); err != nil {
-		return err
+	err = os.MkdirAll(filepath.Dir(path), 0750)
+	if err != nil {
+		return
 	}
 
 	targetFile, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE|os.O_TRUNC, file.Mode())
 	if err != nil {
-		return err
+		return
 	}
 
 	defer func() {
@@ -73,9 +71,5 @@ func extractFile(file *zip.File, target string) (err error) {
 	}()
 
 	_, err = io.Copy(targetFile, fileReader)
-	if err != nil {
-		return
-	}
-
 	return
 }

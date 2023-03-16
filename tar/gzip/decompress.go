@@ -21,9 +21,5 @@ func Decompress(source io.Reader, target string) (err error) {
 	}()
 
 	err = tar.Unarchive(gz, target)
-	if err != nil {
-		return
-	}
-
 	return
 }
