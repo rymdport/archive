@@ -10,7 +10,7 @@ import (
 	"github.com/klauspost/compress/zip"
 )
 
-var errorDangerousFilename = errors.New("dangerous filename detected")
+var errDangerousFilename = errors.New("dangerous filename detected")
 
 // Extract takes a reader and the length and then extracts it to the target.
 func Extract(source io.ReaderAt, length int64, target string) error {
@@ -35,7 +35,7 @@ func extractFile(file *zip.File, target string) (err error) {
 	}
 
 	if !strings.HasPrefix(path, target) {
-		return errorDangerousFilename
+		return errDangerousFilename
 	}
 
 	fileReader, err := file.Open()

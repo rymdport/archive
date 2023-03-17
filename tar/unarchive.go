@@ -2,10 +2,14 @@ package tar
 
 import (
 	"archive/tar"
+	"errors"
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 )
+
+var errDangerousFilename = errors.New("dangerous filename detected")
 
 // Unarchive takes a reader as a tarball source and extracts it to the target directory.
 func Unarchive(source io.Reader, target string) (err error) {
@@ -23,8 +27,11 @@ func Unarchive(source io.Reader, target string) (err error) {
 			return err
 		}
 
-		// TODO: Fix potential directory traversal security issue
 		path := filepath.Join(target, header.Name)
+		if !strings.HasPrefix(path, target) {
+			return errDangerousFilename
+		}
+
 		info := header.FileInfo()
 		if info.IsDir() {
 			if err = os.MkdirAll(path, 0o750); err != nil {
