@@ -3,7 +3,7 @@ package xz
 import (
 	"io"
 
-	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archive/tar"
 	"github.com/ulikunitz/xz"
 )
 

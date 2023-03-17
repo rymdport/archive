@@ -1,7 +1,7 @@
-# Archives
+# Archive
 
-[![Tests](https://github.com/rymdport/archives/actions/workflows/tests.yml/badge.svg)](https://github.com/rymdport/archives/actions/workflows/tests.yml)
-[![Analysis](https://github.com/rymdport/archives/actions/workflows/analysis.yml/badge.svg)](https://github.com/rymdport/archives/actions/workflows/analysis.yml)
+[![Tests](https://github.com/rymdport/archive/actions/workflows/tests.yml/badge.svg)](https://github.com/rymdport/archive/actions/workflows/tests.yml)
+[![Analysis](https://github.com/rymdport/archive/actions/workflows/analysis.yml/badge.svg)](https://github.com/rymdport/archive/actions/workflows/analysis.yml)
 
 A Go package for easy handling of archive formats like `zip` and `tar` (both compressed and compressed).
 

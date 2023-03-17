@@ -1,4 +1,4 @@
-module github.com/rymdport/archives
+module github.com/rymdport/archive
 
 go 1.19
 

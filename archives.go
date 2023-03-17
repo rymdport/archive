@@ -1,16 +1,16 @@
-package archives
+package archive
 
 import (
 	"errors"
 	"io"
 	"strings"
 
-	"github.com/rymdport/archives/tar"
-	"github.com/rymdport/archives/tar/bzip2"
-	"github.com/rymdport/archives/tar/gzip"
-	"github.com/rymdport/archives/tar/xz"
-	"github.com/rymdport/archives/tar/zstd"
-	"github.com/rymdport/archives/zip"
+	"github.com/rymdport/archive/tar"
+	"github.com/rymdport/archive/tar/bzip2"
+	"github.com/rymdport/archive/tar/gzip"
+	"github.com/rymdport/archive/tar/xz"
+	"github.com/rymdport/archive/tar/zstd"
+	"github.com/rymdport/archive/zip"
 )
 
 var (

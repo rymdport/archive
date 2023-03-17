@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/klauspost/compress/zstd"
-	"github.com/rymdport/archives/tar/internal/common"
+	"github.com/rymdport/archive/tar/internal/common"
 )
 
 // Compress takes a source to compress and a target to compress and archive to.

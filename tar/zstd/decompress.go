@@ -4,7 +4,7 @@ import (
 	"io"
 
 	"github.com/klauspost/compress/zstd"
-	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archive/tar"
 )
 
 // Decompress takes a tar.zst source to decompress from and a target to decompress to.

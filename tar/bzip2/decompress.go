@@ -4,7 +4,7 @@ import (
 	"compress/bzip2"
 	"io"
 
-	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archive/tar"
 )
 
 // Decompress takes a tar.bz2 source to decompress from and a target to decompress to.

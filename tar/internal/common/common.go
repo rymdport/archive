@@ -5,7 +5,7 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/rymdport/archives/tar"
+	"github.com/rymdport/archive/tar"
 )
 
 // ArchiveAndCompress provides a common way to archive and compress.
