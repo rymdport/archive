@@ -3,6 +3,7 @@ package archive
 import (
 	"io"
 	"os"
+	"path/filepath"
 
 	"github.com/rymdport/archive/tar"
 	"github.com/rymdport/archive/tar/gzip"
@@ -13,7 +14,7 @@ import (
 
 // CreateFromPath uses the contents at the source path and creates a new archive at the target path.
 func CreateFromPath(source, target string) error {
-	saveTo, err := os.Create(target)
+	saveTo, err := os.Create(filepath.Clean(target))
 	if err != nil {
 		return err
 	}

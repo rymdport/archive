@@ -3,6 +3,7 @@ package archive
 import (
 	"io"
 	"os"
+	"path/filepath"
 
 	"github.com/rymdport/archive/tar"
 	"github.com/rymdport/archive/tar/bzip2"
@@ -14,7 +15,7 @@ import (
 
 // ExtractFromFile extracts the archive at the source path to the target path.
 func ExtractFromFile(source, target string) error {
-	readFrom, err := os.Open(source)
+	readFrom, err := os.Open(filepath.Clean(source))
 	if err != nil {
 		return err
 	}
