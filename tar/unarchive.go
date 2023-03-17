@@ -27,6 +27,7 @@ func Unarchive(source io.Reader, target string) (err error) {
 			return err
 		}
 
+		// TODO: Fix potential file traversal issue.
 		path := filepath.Join(target, header.Name)
 		if !strings.HasPrefix(path, target) {
 			return errDangerousFilename
