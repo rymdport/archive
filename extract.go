@@ -27,7 +27,7 @@ func ExtractFromPath(source, target string) error {
 			return err
 		}
 
-		return zip.Extract(readFrom, info.Size(), target)
+		return zip.ExtractFromReader(readFrom, info.Size(), target)
 	}
 
 	return ExtractFromReader(readFrom, target, ext)
@@ -38,15 +38,15 @@ func ExtractFromPath(source, target string) error {
 func ExtractFromReader(source io.Reader, target string, ext Format) error {
 	switch ext {
 	case Tar:
-		return tar.Unarchive(source, target)
+		return tar.ExtractFromReader(source, target)
 	case TarGzip, TarGzipShort:
-		return gzip.Decompress(source, target)
+		return gzip.DecompressArchive(source, target)
 	case TarXz, TarXzShort:
-		return xz.Decompress(source, target)
+		return xz.DecompressArchive(source, target)
 	case TarZstd, TarZstdShort:
-		return zstd.Decompress(source, target)
+		return zstd.DecompressArchive(source, target)
 	case TarBzip2, TarBzip2Short:
-		return bzip2.Decompress(source, target)
+		return bzip2.DecompressArchive(source, target)
 	case Zip:
 		return tryExtractZip(source, target)
 	}
@@ -76,5 +76,5 @@ func tryExtractZip(source io.Reader, target string) error {
 		return err
 	}
 
-	return zip.Extract(reader, size, target)
+	return zip.ExtractFromReader(reader, size, target)
 }

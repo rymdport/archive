@@ -27,15 +27,15 @@ func CreateFromPath(source, target string) error {
 func CreateToWriter(source string, target io.Writer, ext Format) error {
 	switch ext {
 	case Tar:
-		return tar.Archive(source, target)
+		return tar.CreateToWriter(source, target)
 	case TarGzip, TarGzipShort:
-		return gzip.Compress(source, target)
+		return gzip.ArchiveAndCompress(source, target)
 	case TarXz, TarXzShort:
-		return xz.Compress(source, target)
+		return xz.ArchiveAndCompress(source, target)
 	case TarZstd, TarZstdShort:
-		return zstd.Compress(source, target)
+		return zstd.ArchiveAndCompress(source, target)
 	case Zip:
-		return zip.Archive(source, target)
+		return zip.CreateToWriter(source, target)
 	}
 
 	return ErrInvalidFormat

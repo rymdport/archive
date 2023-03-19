@@ -7,8 +7,8 @@ import (
 	"github.com/rymdport/archive/tar"
 )
 
-// Decompress takes a tar.gz source to decompress from and a target to decompress to.
-func Decompress(source io.Reader, target string) (err error) {
+// DecompressArchive takes a tar.gz source to decompress from and a target to decompress to.
+func DecompressArchive(source io.Reader, target string) (err error) {
 	gz, err := gzip.NewReader(source)
 	if err != nil {
 		return err
@@ -20,6 +20,6 @@ func Decompress(source io.Reader, target string) (err error) {
 		}
 	}()
 
-	err = tar.Unarchive(gz, target)
+	err = tar.ExtractFromReader(gz, target)
 	return
 }

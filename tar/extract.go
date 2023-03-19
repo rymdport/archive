@@ -11,8 +11,8 @@ import (
 
 var errDangerousFilename = errors.New("dangerous filename detected")
 
-// Unarchive takes a reader as a tarball source and extracts it to the target directory.
-func Unarchive(source io.Reader, target string) (err error) {
+// ExtractFromReader takes a source reader and a target to extract to.
+func ExtractFromReader(source io.Reader, target string) (err error) {
 	if err = os.MkdirAll(target, 0o750); err != nil {
 		return err
 	}
@@ -27,8 +27,11 @@ func Unarchive(source io.Reader, target string) (err error) {
 			return err
 		}
 
-		// TODO: Fix potential file traversal issue.
-		path := filepath.Join(target, header.Name)
+		path, err := filepath.Abs(filepath.Join(target, header.Name))
+		if err != nil {
+			return err
+		}
+
 		if !strings.HasPrefix(path, target) {
 			return errDangerousFilename
 		}

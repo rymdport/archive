@@ -7,7 +7,7 @@ import (
 	"github.com/rymdport/archive/tar"
 )
 
-// Decompress takes a tar.bz2 source to decompress from and a target to decompress to.
-func Decompress(source io.Reader, target string) error {
-	return tar.Unarchive(bzip2.NewReader(source), target)
+// DecompressArchive takes a tar.bz2 source to decompress from and a target to decompress to.
+func DecompressArchive(source io.Reader, target string) error {
+	return tar.ExtractFromReader(bzip2.NewReader(source), target)
 }

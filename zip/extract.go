@@ -12,8 +12,8 @@ import (
 
 var errDangerousFilename = errors.New("dangerous filename detected")
 
-// Extract takes a reader and the length and then extracts it to the target.
-func Extract(source io.ReaderAt, length int64, target string) error {
+// ExtractFromReader takes a source reader and a target to extract to.
+func ExtractFromReader(source io.ReaderAt, length int64, target string) error {
 	reader, err := zip.NewReader(source, length)
 	if err != nil {
 		return err

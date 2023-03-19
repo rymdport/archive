@@ -9,8 +9,9 @@ import (
 	"github.com/klauspost/compress/zip"
 )
 
-// Archive takes a source and a writer for the target to put the resulting archive.
-func Archive(source string, target io.Writer) (err error) {
+// CreateToWriter creates a new zip archive in the target writer.
+// The output is written to the writer that is passed.
+func CreateToWriter(source string, target io.Writer) (err error) {
 	writer := zip.NewWriter(target)
 
 	defer func() {

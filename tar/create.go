@@ -8,8 +8,37 @@ import (
 	"strings"
 )
 
-// Archive creates a tar archive using the target writer provided.
-func Archive(source string, target io.Writer) (err error) {
+// CreateToPath uses the contents at the source path and creates a new archive at the target path.
+func CreateToPath(source, target string) error {
+	saveTo, err := os.Create(filepath.Clean(target))
+	if err != nil {
+		return err
+	}
+
+	return CreateToWriter(source, saveTo)
+}
+
+// CreateFromPathToWriter provides a common way to archive and compress.
+// It opens the file at source and writes the archive to the compress writer.
+func CreateFromPathToWriter(source string, compress io.Writer) (err error) {
+	file, err := os.Open(filepath.Clean(source))
+	if err != nil {
+		return err
+	}
+
+	defer func() {
+		if cerr := file.Close(); cerr != nil {
+			err = cerr
+		}
+	}()
+
+	err = CreateToWriter(source, compress)
+	return
+}
+
+// CreateToWriter creates a new tar archive in the target writer.
+// The output is written to the writer that is passed.
+func CreateToWriter(source string, target io.Writer) (err error) {
 	tarball := tar.NewWriter(target)
 
 	defer func() {

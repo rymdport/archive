@@ -4,11 +4,11 @@ import (
 	"io"
 
 	"github.com/klauspost/compress/gzip"
-	"github.com/rymdport/archive/tar/internal/common"
+	"github.com/rymdport/archive/tar"
 )
 
-// Compress takes a source to compress and a target to compress and archive to.
-func Compress(source string, target io.Writer) (err error) {
+// ArchiveAndCompress takes a source to compress and a target to compress and archive to.
+func ArchiveAndCompress(source string, target io.Writer) (err error) {
 	gz := gzip.NewWriter(target)
 
 	defer func() {
@@ -17,6 +17,6 @@ func Compress(source string, target io.Writer) (err error) {
 		}
 	}()
 
-	err = common.ArchiveAndCompress(source, gz)
+	err = tar.CreateFromPathToWriter(source, gz)
 	return
 }

@@ -4,11 +4,11 @@ import (
 	"io"
 
 	"github.com/klauspost/compress/zstd"
-	"github.com/rymdport/archive/tar/internal/common"
+	"github.com/rymdport/archive/tar"
 )
 
-// Compress takes a source to compress and a target to compress and archive to.
-func Compress(source string, target io.Writer) (err error) {
+// ArchiveAndCompress takes a source to compress and a target to compress and archive to.
+func ArchiveAndCompress(source string, target io.Writer) (err error) {
 	zstd, err := zstd.NewWriter(target)
 	if err != nil {
 		return err
@@ -20,6 +20,6 @@ func Compress(source string, target io.Writer) (err error) {
 		}
 	}()
 
-	err = common.ArchiveAndCompress(source, zstd)
+	err = tar.CreateFromPathToWriter(source, zstd)
 	return
 }
