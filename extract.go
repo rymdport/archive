@@ -13,14 +13,24 @@ import (
 	"github.com/rymdport/archive/zip"
 )
 
-// ExtractFromFile extracts the archive at the source path to the target path.
-func ExtractFromFile(source, target string) error {
+// ExtractFromPath extracts the archive at the source path to the target path.
+func ExtractFromPath(source, target string) error {
 	readFrom, err := os.Open(filepath.Clean(source))
 	if err != nil {
 		return err
 	}
 
-	return ExtractFromReader(readFrom, target, extensionsFromFile(source))
+	ext := extensionsFromFile(source)
+	if ext == Zip { // We know that *os.File can use ReaderAt() and Stat().
+		info, err := readFrom.Stat()
+		if err != nil {
+			return err
+		}
+
+		return zip.Extract(readFrom, info.Size(), target)
+	}
+
+	return ExtractFromReader(readFrom, target, ext)
 }
 
 // ExtractFromReader takes a source reader, a path to save the archive at and a format to select archive and compression type.
