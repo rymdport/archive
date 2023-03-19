@@ -27,7 +27,7 @@ func ExtractFromReader(source io.Reader, target string) (err error) {
 			return err
 		}
 
-		path, err := filepath.Abs(filepath.Join(target, header.Name))
+		path, err := filepath.Abs(filepath.Join(target, header.Name)) // #nosec - file traversal is checked with HasPrefix().
 		if err != nil {
 			return err
 		}
